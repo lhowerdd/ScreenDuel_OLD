@@ -18,6 +18,8 @@
 		16A476CA2C3B322200E7D1EA /* ScreenDuelUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A476C92C3B322200E7D1EA /* ScreenDuelUITestsLaunchTests.swift */; };
 		16A476D82C3B32E000E7D1EA /* HomePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A476D72C3B32E000E7D1EA /* HomePageView.swift */; };
 		16A476DA2C3B3AE400E7D1EA /* TimeSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A476D92C3B3AE400E7D1EA /* TimeSelectorView.swift */; };
+		16A476DD2C3C61F400E7D1EA /* DuelSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A476DC2C3C61F400E7D1EA /* DuelSession.swift */; };
+		16A476DF2C3C753B00E7D1EA /* AppSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A476DE2C3C753B00E7D1EA /* AppSelectorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +54,9 @@
 		16A476C92C3B322200E7D1EA /* ScreenDuelUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenDuelUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		16A476D72C3B32E000E7D1EA /* HomePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageView.swift; sourceTree = "<group>"; };
 		16A476D92C3B3AE400E7D1EA /* TimeSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSelectorView.swift; sourceTree = "<group>"; };
+		16A476DC2C3C61F400E7D1EA /* DuelSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuelSession.swift; sourceTree = "<group>"; };
+		16A476DE2C3C753B00E7D1EA /* AppSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSelectorView.swift; sourceTree = "<group>"; };
+		16F8987B2C3DB4E600827B03 /* ScreenDuel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ScreenDuel.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +107,7 @@
 		16A476A62C3B322100E7D1EA /* ScreenDuel */ = {
 			isa = PBXGroup;
 			children = (
+				16F8987B2C3DB4E600827B03 /* ScreenDuel.entitlements */,
 				16A476DB2C3B4A5A00E7D1EA /* Models */,
 				16A476D62C3B32C400E7D1EA /* Views */,
 				16A476A72C3B322100E7D1EA /* ScreenDuelApp.swift */,
@@ -144,6 +150,7 @@
 			children = (
 				16A476D72C3B32E000E7D1EA /* HomePageView.swift */,
 				16A476D92C3B3AE400E7D1EA /* TimeSelectorView.swift */,
+				16A476DE2C3C753B00E7D1EA /* AppSelectorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -151,6 +158,7 @@
 		16A476DB2C3B4A5A00E7D1EA /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				16A476DC2C3C61F400E7D1EA /* DuelSession.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -285,10 +293,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16A476DD2C3C61F400E7D1EA /* DuelSession.swift in Sources */,
 				16A476DA2C3B3AE400E7D1EA /* TimeSelectorView.swift in Sources */,
 				16A476B12C3B322200E7D1EA /* Persistence.swift in Sources */,
 				16A476B42C3B322200E7D1EA /* ScreenDuel.xcdatamodeld in Sources */,
 				16A476AA2C3B322100E7D1EA /* ContentView.swift in Sources */,
+				16A476DF2C3C753B00E7D1EA /* AppSelectorView.swift in Sources */,
 				16A476A82C3B322100E7D1EA /* ScreenDuelApp.swift in Sources */,
 				16A476D82C3B32E000E7D1EA /* HomePageView.swift in Sources */,
 			);
@@ -451,9 +461,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ScreenDuel/ScreenDuel.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ScreenDuel/Preview Content\"";
+				DEVELOPMENT_TEAM = 378NQ4JQ6T;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -479,9 +491,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ScreenDuel/ScreenDuel.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ScreenDuel/Preview Content\"";
+				DEVELOPMENT_TEAM = 378NQ4JQ6T;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
