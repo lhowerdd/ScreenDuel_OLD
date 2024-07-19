@@ -8,8 +8,8 @@
 import Foundation
 import SwiftUI
 
-
-class DuelTimer: ObservableObject {
+@Observable
+class DuelTimer {
     
     let length: Int
     
@@ -22,7 +22,7 @@ class DuelTimer: ObservableObject {
     
     var isTimerRunning = false
     
-    @Published var timeRemaining: Int {
+    var timeRemaining: Int {
         length - timeElapsed
     }
     
@@ -45,5 +45,13 @@ class DuelTimer: ObservableObject {
         }
     }
     
+    var playButtonDisabled: Bool {
+        guard timeRemaining > 0, !isTimerRunning else { return true}
+        return false
+    }
     
+    var pauseButtonDisabled: Bool {
+        guard timeRemaining > 0, isTimerRunning else { return true }
+        return false
+    }
 }
