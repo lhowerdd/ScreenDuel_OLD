@@ -1,8 +1,8 @@
 //
-//  HomePageView.swift
+//  DuelView.swift
 //  ScreenDuel
 //
-//  Created by Leo Howerdd on 7/7/24.
+//  Created by Leo Howerdd on 7/18/24.
 //
 
 import Foundation
@@ -10,38 +10,36 @@ import SwiftUI
 
 struct HomePageView: View {
     
-    @State var duelSession: DuelSession = DuelSession(hours: 0, minutes: 5)
+    @State private var sessionInProgress: Bool = false
+    @State private var duelSession: DuelSession = DuelSession(hours: 0, minutes: 5)
+    
     
     var body: some View {
-        NavigationStack {
+        if sessionInProgress {
+            Text("in progress")
+            DuelView(duelTimer: duelSession.createDuelTimer())
+        }
+        else {
             VStack {
-                Text("Welcome to ScreenDuel")
-                List {
-                    
-                    Section(header: Text("Create a screen duel session")) {
-                        NavigationLink(destination: TimeSelectorView(hours: $duelSession.hours, minutes: $duelSession.minutes)) {
-                            Text("Session Length: \(duelSession.hours)h \(duelSession.minutes)m")
-                        }
-                        NavigationLink(destination: AppSelectorView(selection: $duelSession.apps)) {
-                            Text("Apps to block")
-                        }
-                    }
-                }
-                //.frame(maxHeight: 175)
-                Button(action: {}) {
+                DuelCreatorView(duelSession: $duelSession)
+                Button(action: {startSession()}) {
                     Label("Begin screen dueling", systemImage: "play.fill")
                 }
-                Spacer()
-                
+              
             }
         }
     }
+    
+    
+
+    func startSession() {
+        sessionInProgress = true
+    }
 }
+
 
 struct HomePageViewPreview: PreviewProvider {
     static var previews: some View {
         HomePageView()
     }
 }
-
-

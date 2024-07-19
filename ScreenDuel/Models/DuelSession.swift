@@ -23,4 +23,8 @@ struct DuelSession {
         self.apps = FamilyActivitySelection()
     }
     
+    func createDuelTimer() -> DuelTimer {
+        return DuelTimer(hours: self.hours, minutes: self.minutes)
+    }
+    
 }
