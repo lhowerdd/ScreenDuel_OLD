@@ -10,22 +10,36 @@ import SwiftUI
 
 struct DuelView: View {
     
-    @ObservedObject var duelTimer: DuelTimer
-    
-    init(duelTimer: DuelTimer) {
-        self.duelTimer = duelTimer
+    var duelTimer: DuelTimer
+    var duelSession: DuelSession
+    init(duelSession: DuelSession) {
+        self.duelTimer = duelSession.createDuelTimer()
+        self.duelSession = duelSession
     }
+    
+    
+    
     
     var body: some View {
         VStack {
-            Text(formatTime(totalSeconds: duelTimer.timeRemaining))
-            Button(action: {duelTimer.startTimer()}) {
-                Label("start timer", systemImage: "play.fill")
+            VStack {
+                Text(formatTime(totalSeconds: duelTimer.timeRemaining))
+                    .monospacedDigit()
+                    .bold()
+            }
+            .contentTransition(.numericText())
+            HStack {
+                Button {duelTimer.startTimer()}
+                    label: { Image(systemName: "play.fill")}
+                    .disabled(duelTimer.playButtonDisabled)
+                Button {duelTimer.stopTimer()}
+                    label: {Image(systemName: "pause.fill")}
+                    .disabled(duelTimer.pauseButtonDisabled)
             }
         }
-        .bold()
-        .contentTransition(.numericText())
-        .animation(.linear, value: duelTimer.timeRemaining)
+        .onAppear() {
+            duelTimer.startTimer()
+        }
     }
     
     func formatTime(totalSeconds: Int) -> String {
@@ -42,6 +56,21 @@ struct DuelView: View {
 
 struct DuelViewPreview: PreviewProvider {
     static var previews: some View {
-        DuelView(duelTimer: DuelTimer(hours: 1, minutes: 5))
+        DuelView(duelSession: DuelSession(hours: 1, minutes: 5))
+    }
+}
+
+struct ControlButtonStyle: ViewModifier {
+    //let color: Color
+    let disabled: Bool
+    func body(content: Content) -> some View {
+        content
+            .font(.title)
+            .bold()
+            .frame(width: 50, height: 50)
+            //.background(color).opacity(disabled ? 0.5 : 1)
+            .foregroundStyle(.white)
+            .clipShape(Circle())
+            .disabled(disabled)
     }
 }

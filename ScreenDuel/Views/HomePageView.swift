@@ -16,8 +16,10 @@ struct HomePageView: View {
     
     var body: some View {
         if sessionInProgress {
-            Text("in progress")
-            DuelView(duelTimer: duelSession.createDuelTimer())
+            VStack {
+                Text("Screen Dueling In Progress")
+                DuelView(duelSession: duelSession)
+            }
         }
         else {
             VStack {
@@ -25,13 +27,12 @@ struct HomePageView: View {
                 Button(action: {startSession()}) {
                     Label("Begin screen dueling", systemImage: "play.fill")
                 }
-              
             }
         }
     }
     
     
-
+    
     func startSession() {
         sessionInProgress = true
     }
