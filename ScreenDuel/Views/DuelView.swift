@@ -11,10 +11,14 @@ import SwiftUI
 struct DuelView: View {
     
     var duelTimer: DuelTimer
-    
-    init(duelTimer: DuelTimer) {
-        self.duelTimer = duelTimer
+    var duelSession: DuelSession
+    init(duelSession: DuelSession) {
+        self.duelTimer = duelSession.createDuelTimer()
+        self.duelSession = duelSession
     }
+    
+    
+    
     
     var body: some View {
         VStack {
@@ -52,7 +56,7 @@ struct DuelView: View {
 
 struct DuelViewPreview: PreviewProvider {
     static var previews: some View {
-        DuelView(duelTimer: DuelTimer(hours: 1, minutes: 5))
+        DuelView(duelSession: DuelSession(hours: 1, minutes: 5))
     }
 }
 

@@ -18,7 +18,7 @@ struct HomePageView: View {
         if sessionInProgress {
             VStack {
                 Text("Screen Dueling In Progress")
-                DuelView(duelTimer: duelSession.createDuelTimer())
+                DuelView(duelSession: duelSession)
             }
         }
         else {

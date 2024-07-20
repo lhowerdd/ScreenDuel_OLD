@@ -27,4 +27,8 @@ struct DuelSession {
         return DuelTimer(hours: self.hours, minutes: self.minutes)
     }
     
+    
+    
+    
+    
 }
