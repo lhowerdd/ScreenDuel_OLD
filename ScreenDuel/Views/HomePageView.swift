@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import DeviceActivity
 
 struct HomePageView: View {
     
@@ -18,7 +19,7 @@ struct HomePageView: View {
         if sessionInProgress {
             VStack {
                 Text("Screen Dueling In Progress")
-                DuelView(duelSession: duelSession)
+                DuelView(duelSession: duelSession, schedule: setSessionSchedule())
             }
         }
         else {
@@ -36,7 +37,21 @@ struct HomePageView: View {
     func startSession() {
         sessionInProgress = true
     }
+    
+    func setSessionSchedule() -> DeviceActivitySchedule {
+        let currentDate = Date()
+        let currentTime = Calendar.current.dateComponents([.hour, .minute, .second], from: currentDate)
+        let duelSessionDateComponent = DateComponents(hour: duelSession.hours, minute: duelSession.minutes)
+        let calendar = Calendar.current
+        let endTimeDateWrapped = calendar.date(byAdding: duelSessionDateComponent, to: currentDate)
+        let endTime = calendar.dateComponents([.year,.month,.day,.hour,.minute,.second], from: endTimeDateWrapped ?? Date())
+        return DeviceActivitySchedule(intervalStart: currentTime, intervalEnd: endTime, repeats: false)
+    }
+    
 }
+
+
+
 
 
 struct HomePageViewPreview: PreviewProvider {

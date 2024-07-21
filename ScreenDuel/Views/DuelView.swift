@@ -15,23 +15,22 @@ struct DuelView: View {
     let duelTimer: DuelTimer
     let duelSession: DuelSession
     let deviceActivityEvent: DeviceActivityEvent
-    lazy var deviceActivitySchedule: DeviceActivitySchedule = {
-        let currentDate = Date()
-        let currentTime = Calendar.current.dateComponents([.hour, .minute, .second], from: currentDate)
-        let duelSessionDateComponent = DateComponents(hour: duelSession.hours, minute: duelSession.minutes)
-        let calendar = Calendar.current
-        let endTimeDateWrapped = calendar.date(byAdding: duelSessionDateComponent, to: currentDate)
-        let endTime = calendar.dateComponents([.year,.month,.day,.hour,.minute,.second], from: endTimeDateWrapped ?? Date())
-        return DeviceActivitySchedule(intervalStart: currentTime, intervalEnd: endTime, repeats: false)
-    }()
+    var deviceActivitySchedule: DeviceActivitySchedule
     let deviceActivityCenter: DeviceActivityCenter = DeviceActivityCenter()
-    let activityName: DeviceActivityName = DeviceActivityName("duelActivity")
+    //let activityName: DeviceActivityName = DeviceActivityName("duelActivity")
+    //let eventName: DeviceActivityEvent.Name: DeviceActivityEvent.Name("duelEvent")
+    //let events: [DeviceActivityEvent.Name: DeviceActivityEvent]
     
-    init(duelSession: DuelSession) {
+    init(duelSession: DuelSession, schedule: DeviceActivitySchedule) {
         self.duelTimer = duelSession.createDuelTimer()
         self.duelSession = duelSession
         self.deviceActivityEvent = DeviceActivityEvent(applications: duelSession.apps.applicationTokens, threshold: DateComponents(second: 0))
+        self.deviceActivitySchedule = schedule
+        //self.events = Dictionary()
+        //events.updateValue(deviceActivityEvent, forKey: deviceActivityEvent.Name)
     }
+    
+    //try deviceAcivityCenter.startMonitoring(.duelActivity, during: deviceActivitySchedule)
     
     
     var body: some View {
@@ -57,7 +56,14 @@ struct DuelView: View {
         }
         .onAppear() {
             duelTimer.startTimer()
-            deviceActivityCenter.startMonitoring(activityName, during: deviceActivitySchedule)
+            do {
+                let sharedBlockedApps = BlockedApps.shared()
+                sharedBlockedApps.setSelection(selection: duelSession.apps)
+                try deviceActivityCenter.startMonitoring(.duelActivity, during: deviceActivitySchedule)
+            }
+            catch {
+                print("error with monitor")
+            }
         }
     }
     
@@ -71,18 +77,6 @@ struct DuelView: View {
         return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
     }
     
-    
-    func setSessionSchedule() -> DeviceActivitySchedule {
-        let currentDate = Date()
-        let currentTime = Calendar.current.dateComponents([.hour, .minute, .second], from: currentDate)
-        let duelSessionDateComponent = DateComponents(hour: duelSession.hours, minute: duelSession.minutes)
-        let calendar = Calendar.current
-        let endTimeDateWrapped = calendar.date(byAdding: duelSessionDateComponent, to: currentDate)
-        let endTime = calendar.dateComponents([.year,.month,.day,.hour,.minute,.second], from: endTimeDateWrapped ?? Date())
-        return DeviceActivitySchedule(intervalStart: currentTime, intervalEnd: endTime, repeats: false)
-    }
-    
-    
     func formatDate(dateComp: DateComponents) -> String {
         guard let hour = dateComp.hour,
                   let minute = dateComp.minute,
@@ -92,24 +86,19 @@ struct DuelView: View {
         return String(format: "%02d:%02d:%02d", hour, minute, second)
     }
     
-    func makeMutableInterval(wantStart: Bool) -> DateComponents {
-        var mutable = self
-        if wantStart {
-            return mutable.deviceActivitySchedule.intervalStart
-        }
-        else{
-            return mutable.deviceActivitySchedule.intervalEnd
-        }
-    }
     
-    
+}
+
+
+extension DeviceActivityName {
+    static let duelActivity = Self("duelActivity")
 }
 
 
 
 struct DuelViewPreview: PreviewProvider {
     static var previews: some View {
-        DuelView(duelSession: DuelSession(hours: 1, minutes: 5))
+        DuelView(duelSession: DuelSession(hours: 1, minutes: 5), schedule: DeviceActivitySchedule(intervalStart: DateComponents(), intervalEnd: DateComponents(), repeats: true))
     }
 }
 

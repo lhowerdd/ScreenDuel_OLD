@@ -7,7 +7,7 @@
 
 import Foundation
 import FamilyControls
-
+import DeviceActivity
 
 struct DuelSession {
     //how many hours the session is
@@ -16,6 +16,7 @@ struct DuelSession {
     var minutes: Int
     //abstraction of apps selected in the session
     var apps: FamilyActivitySelection
+        
     
     init(hours: Int, minutes: Int) {
         self.minutes = minutes
