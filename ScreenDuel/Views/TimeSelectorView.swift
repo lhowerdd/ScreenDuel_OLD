@@ -14,7 +14,7 @@ struct TimeSelectorView: View {
     @Binding var minutes: Int
     
     let hourOptions = Array(0...23)
-    let minuteOptions = Array(1...59)
+    let minuteOptions = Array(15...59)
     
     var body: some View {
         HStack {

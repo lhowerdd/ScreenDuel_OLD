@@ -12,7 +12,7 @@ import DeviceActivity
 struct HomePageView: View {
     
     @State private var sessionInProgress: Bool = false
-    @State private var duelSession: DuelSession = DuelSession(hours: 0, minutes: 5)
+    @State private var duelSession: DuelSession = DuelSession(hours: 0, minutes: 15)
     
     var body: some View {
         if sessionInProgress {

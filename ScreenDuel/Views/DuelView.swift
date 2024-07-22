@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import DeviceActivity
 import ManagedSettings
+import FamilyControls
 
 struct DuelView: View {
     
@@ -53,7 +54,14 @@ struct DuelView: View {
                 duelTimer.startTimer()
                 print(deviceActivitySchedule.intervalStart)
                 print(deviceActivitySchedule.intervalEnd)
+                //
+                print("selection before encoding")
+                print(duelSession.apps.applicationTokens)
                 saveSelection()
+                print("selection after encoding")
+                if let decodedSession = decodeSelection() {
+                    print(decodedSession.applicationTokens)
+                }
                 try deviceActivityCenter.startMonitoring(.duelActivity, during: deviceActivitySchedule)
                 
             }
@@ -72,6 +80,25 @@ struct DuelView: View {
             )
         }
     }
+    
+    
+    func decodeSelection() -> FamilyActivitySelection? {
+        let userDefaults = UserDefaults(suiteName: "group.378NQ4JQ6T.com.ScreenDuel.Len")
+        guard let encodedSelection = userDefaults?.data(forKey: "duelSelection") else {
+            return nil
+        }
+           
+        let decoder = PropertyListDecoder()
+        do {
+            let selection = try decoder.decode(FamilyActivitySelection.self, from: encodedSelection)
+            return selection
+        }
+        catch {
+            print("Failed to decode FamilyActivitySelection: \(error)")
+            return nil
+        }
+    }
+    
     
     
     func formatTime(totalSeconds: Int) -> String {
