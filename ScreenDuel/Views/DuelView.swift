@@ -52,6 +52,7 @@ struct DuelView: View {
         .onAppear() {
             do {
                 duelTimer.startTimer()
+                /*
                 print(deviceActivitySchedule.intervalStart)
                 print(deviceActivitySchedule.intervalEnd)
                 //
@@ -63,7 +64,7 @@ struct DuelView: View {
                     print(decodedSession.applicationTokens)
                 }
                 try deviceActivityCenter.startMonitoring(.duelActivity, during: deviceActivitySchedule)
-                
+                */
             }
             catch {
                 print("error: \(error)")
@@ -120,10 +121,11 @@ struct DuelView: View {
     }
 }
 
-
+/*
 extension DeviceActivityName {
     static let duelActivity = Self("duelActivity")
 }
+*/
 
 
 struct DuelViewPreview: PreviewProvider {
