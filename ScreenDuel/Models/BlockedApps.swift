@@ -9,7 +9,7 @@ import Foundation
 import FamilyControls
 
 class BlockedApps {
-    
+    /*
     private static var sharedBlockedApps: BlockedApps = {
         let blockedApps = BlockedApps(selection: FamilyActivitySelection())
         return blockedApps
@@ -28,5 +28,16 @@ class BlockedApps {
     func setSelection(selection: FamilyActivitySelection) {
         self.selection = selection
     }
+    */
     
+    static let shared = BlockedApps()
+    
+    var selection = FamilyActivitySelection()
+    
+    private init() {}
+    
+    func setSelection(selection: FamilyActivitySelection) {
+        self.selection = selection
+    }
+        
 }

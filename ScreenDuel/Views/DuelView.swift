@@ -17,21 +17,15 @@ struct DuelView: View {
     let deviceActivityEvent: DeviceActivityEvent
     var deviceActivitySchedule: DeviceActivitySchedule
     let deviceActivityCenter: DeviceActivityCenter = DeviceActivityCenter()
-    //let activityName: DeviceActivityName = DeviceActivityName("duelActivity")
-    //let eventName: DeviceActivityEvent.Name: DeviceActivityEvent.Name("duelEvent")
-    //let events: [DeviceActivityEvent.Name: DeviceActivityEvent]
+    
     
     init(duelSession: DuelSession, schedule: DeviceActivitySchedule) {
         self.duelTimer = duelSession.createDuelTimer()
         self.duelSession = duelSession
         self.deviceActivityEvent = DeviceActivityEvent(applications: duelSession.apps.applicationTokens, threshold: DateComponents(second: 0))
         self.deviceActivitySchedule = schedule
-        //self.events = Dictionary()
-        //events.updateValue(deviceActivityEvent, forKey: deviceActivityEvent.Name)
     }
-    
-    //try deviceAcivityCenter.startMonitoring(.duelActivity, during: deviceActivitySchedule)
-    
+        
     
     var body: some View {
         VStack {
@@ -55,18 +49,29 @@ struct DuelView: View {
             }
         }
         .onAppear() {
-            duelTimer.startTimer()
             do {
-                let sharedBlockedApps = BlockedApps.shared()
-                sharedBlockedApps.setSelection(selection: duelSession.apps)
+                duelTimer.startTimer()
+                print(deviceActivitySchedule.intervalStart)
+                print(deviceActivitySchedule.intervalEnd)
+                saveSelection()
                 try deviceActivityCenter.startMonitoring(.duelActivity, during: deviceActivitySchedule)
+                
             }
             catch {
-                print("error with monitor")
+                print("error: \(error)")
             }
         }
     }
     
+    func saveSelection() {
+        let encoder = PropertyListEncoder()
+        if let userDefaults = UserDefaults(suiteName: "group.378NQ4JQ6T.com.ScreenDuel.Len") {
+            userDefaults.set(
+                try? encoder.encode(duelSession.apps),
+                forKey: "duelSelection"
+            )
+        }
+    }
     
     
     func formatTime(totalSeconds: Int) -> String {
@@ -77,6 +82,7 @@ struct DuelView: View {
         return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
     }
     
+    
     func formatDate(dateComp: DateComponents) -> String {
         guard let hour = dateComp.hour,
                   let minute = dateComp.minute,
@@ -85,15 +91,12 @@ struct DuelView: View {
             }
         return String(format: "%02d:%02d:%02d", hour, minute, second)
     }
-    
-    
 }
 
 
 extension DeviceActivityName {
     static let duelActivity = Self("duelActivity")
 }
-
 
 
 struct DuelViewPreview: PreviewProvider {

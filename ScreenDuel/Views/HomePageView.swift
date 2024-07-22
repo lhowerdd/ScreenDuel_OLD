@@ -14,12 +14,11 @@ struct HomePageView: View {
     @State private var sessionInProgress: Bool = false
     @State private var duelSession: DuelSession = DuelSession(hours: 0, minutes: 5)
     
-    
     var body: some View {
         if sessionInProgress {
             VStack {
                 Text("Screen Dueling In Progress")
-                DuelView(duelSession: duelSession, schedule: setSessionSchedule())
+                DuelView(duelSession: duelSession, schedule: setSessionSchedule(hours: duelSession.hours, minutes: duelSession.minutes))
             }
         }
         else {
@@ -33,25 +32,32 @@ struct HomePageView: View {
     }
     
     
-    
     func startSession() {
         sessionInProgress = true
     }
     
-    func setSessionSchedule() -> DeviceActivitySchedule {
-        let currentDate = Date()
-        let currentTime = Calendar.current.dateComponents([.hour, .minute, .second], from: currentDate)
-        let duelSessionDateComponent = DateComponents(hour: duelSession.hours, minute: duelSession.minutes)
-        let calendar = Calendar.current
-        let endTimeDateWrapped = calendar.date(byAdding: duelSessionDateComponent, to: currentDate)
-        let endTime = calendar.dateComponents([.year,.month,.day,.hour,.minute,.second], from: endTimeDateWrapped ?? Date())
-        return DeviceActivitySchedule(intervalStart: currentTime, intervalEnd: endTime, repeats: false)
-    }
     
+    func setSessionSchedule(hours: Int, minutes: Int) -> DeviceActivitySchedule {
+        let currentDate = Date()
+            let startInterval = currentDate.addingTimeInterval(20) // 20 seconds after the current time
+            
+            let calendar = Calendar.current
+            
+            // Convert start interval to DateComponents
+            let startComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: startInterval)
+            
+            // Calculate end interval by adding the specified hours and minutes to the start interval
+            var dateComponents = DateComponents()
+            dateComponents.hour = hours
+            dateComponents.minute = minutes
+            
+            let endInterval = calendar.date(byAdding: dateComponents, to: startInterval)!
+            
+            // Convert end interval to DateComponents
+            let endComponents = calendar.dateComponents([.year,.month, .day, .hour, .minute, .second], from: endInterval)
+            return DeviceActivitySchedule(intervalStart: startComponents, intervalEnd: endComponents, repeats: false)
+    }
 }
-
-
-
 
 
 struct HomePageViewPreview: PreviewProvider {

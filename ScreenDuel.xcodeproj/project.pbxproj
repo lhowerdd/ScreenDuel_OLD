@@ -54,6 +54,7 @@
 		1645E6822C4AED7A0089A8DB /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		1645E6842C4B6D050089A8DB /* DuelSessionMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuelSessionMonitor.swift; sourceTree = "<group>"; };
 		16653B7E2C4C5EFA00D632ED /* BlockedApps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedApps.swift; sourceTree = "<group>"; };
+		1670995C2C4DEB9F0075107B /* ScreenDuelDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ScreenDuelDebug.entitlements; sourceTree = "<group>"; };
 		16A476A42C3B322100E7D1EA /* ScreenDuel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScreenDuel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16A476A72C3B322100E7D1EA /* ScreenDuelApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenDuelApp.swift; sourceTree = "<group>"; };
 		16A476A92C3B322100E7D1EA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -121,6 +122,7 @@
 		16A476A62C3B322100E7D1EA /* ScreenDuel */ = {
 			isa = PBXGroup;
 			children = (
+				1670995C2C4DEB9F0075107B /* ScreenDuelDebug.entitlements */,
 				16F8987B2C3DB4E600827B03 /* ScreenDuel.entitlements */,
 				16A476DB2C3B4A5A00E7D1EA /* Models */,
 				16A476D62C3B32C400E7D1EA /* Views */,
@@ -489,7 +491,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = ScreenDuel/ScreenDuel.entitlements;
+				CODE_SIGN_ENTITLEMENTS = ScreenDuel/ScreenDuelDebug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ScreenDuel/Preview Content\"";

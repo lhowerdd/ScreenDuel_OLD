@@ -4,5 +4,9 @@
 <dict>
 	<key>com.apple.developer.family-controls</key>
 	<true/>
+	<key>com.apple.security.application-groups</key>
+	<array>
+		<string>group.378NQ4JQ6T.com.ScreenDuel.LenSoft</string>
+	</array>
 </dict>
 </plist>
