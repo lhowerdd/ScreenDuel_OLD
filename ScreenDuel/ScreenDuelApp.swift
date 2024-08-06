@@ -16,7 +16,12 @@ struct ScreenDuelApp: App {
     
     var body: some Scene {
         WindowGroup {
-            HomePageView()
+            if familyControlsAuthorizer.authorized {
+                HomePageView()
+            }
+            else{
+                ReauthorizeView(familyControlsAuthorizer: familyControlsAuthorizer)
+            }
             //ContentView()
             //.environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
@@ -24,7 +29,30 @@ struct ScreenDuelApp: App {
 }
 
 
+struct ReauthorizeView: View {
+    
+    @ObservedObject var familyControlsAuthorizer: FamilyControlsAuthorizer
+    
+    var body: some View {
+        if familyControlsAuthorizer.authorized {
+            HomePageView()
+        }
+        else {
+            Button(action:
+                {Task {
+                    await familyControlsAuthorizer.reauthorize()
+                }
+            })
+            { Label("grant acesss", systemImage: "arrow.uturn.forward.circle.fill")}
+        }
+    }
+}
+
+
+
 class FamilyControlsAuthorizer: ObservableObject {
+     @Published var authorized = true
+    
     init() {
         Task {
             await authorize()
@@ -35,11 +63,26 @@ class FamilyControlsAuthorizer: ObservableObject {
         let center = AuthorizationCenter.shared
         do {
             try await center.requestAuthorization(for: FamilyControlsMember.individual)
-        } 
+            authorized = true
+        }
         catch {
             print("authorization failed")
+            authorized = false
         }
     }
+    
+    func reauthorize() async {
+        let center = AuthorizationCenter.shared
+        do {
+            try await center.requestAuthorization(for: FamilyControlsMember.individual)
+            authorized = true
+        }
+        catch {
+            print("authorization failed")
+            authorized = false
+        }
+    }
+    
 }
 
 

@@ -14,6 +14,7 @@
 		1645E6832C4AED7A0089A8DB /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1645E6822C4AED7A0089A8DB /* TimerView.swift */; };
 		1645E6852C4B6D050089A8DB /* DuelSessionMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1645E6842C4B6D050089A8DB /* DuelSessionMonitor.swift */; };
 		16653B7F2C4C5EFA00D632ED /* BlockedApps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16653B7E2C4C5EFA00D632ED /* BlockedApps.swift */; };
+		167B9E732C6194050016F0FB /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 167B9E722C6194050016F0FB /* AppView.swift */; };
 		16A476A82C3B322100E7D1EA /* ScreenDuelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A476A72C3B322100E7D1EA /* ScreenDuelApp.swift */; };
 		16A476AA2C3B322100E7D1EA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A476A92C3B322100E7D1EA /* ContentView.swift */; };
 		16A476AC2C3B322200E7D1EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 16A476AB2C3B322200E7D1EA /* Assets.xcassets */; };
@@ -55,6 +56,7 @@
 		1645E6842C4B6D050089A8DB /* DuelSessionMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuelSessionMonitor.swift; sourceTree = "<group>"; };
 		16653B7E2C4C5EFA00D632ED /* BlockedApps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedApps.swift; sourceTree = "<group>"; };
 		1670995C2C4DEB9F0075107B /* ScreenDuelDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ScreenDuelDebug.entitlements; sourceTree = "<group>"; };
+		167B9E722C6194050016F0FB /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		16A476A42C3B322100E7D1EA /* ScreenDuel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScreenDuel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16A476A72C3B322100E7D1EA /* ScreenDuelApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenDuelApp.swift; sourceTree = "<group>"; };
 		16A476A92C3B322100E7D1EA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -99,6 +101,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		167B9E6F2C6192E60016F0FB /* deprecated */ = {
+			isa = PBXGroup;
+			children = (
+				16A476D62C3B32C400E7D1EA /* Views */,
+				16A476DB2C3B4A5A00E7D1EA /* Models */,
+			);
+			path = deprecated;
+			sourceTree = "<group>";
+		};
+		167B9E702C6193B50016F0FB /* views */ = {
+			isa = PBXGroup;
+			children = (
+				167B9E722C6194050016F0FB /* AppView.swift */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		167B9E712C6193CF0016F0FB /* models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
 		16A4769B2C3B322100E7D1EA = {
 			isa = PBXGroup;
 			children = (
@@ -122,15 +148,16 @@
 		16A476A62C3B322100E7D1EA /* ScreenDuel */ = {
 			isa = PBXGroup;
 			children = (
-				1670995C2C4DEB9F0075107B /* ScreenDuelDebug.entitlements */,
-				16F8987B2C3DB4E600827B03 /* ScreenDuel.entitlements */,
-				16A476DB2C3B4A5A00E7D1EA /* Models */,
-				16A476D62C3B32C400E7D1EA /* Views */,
+				167B9E712C6193CF0016F0FB /* models */,
+				167B9E702C6193B50016F0FB /* views */,
 				16A476A72C3B322100E7D1EA /* ScreenDuelApp.swift */,
 				16A476A92C3B322100E7D1EA /* ContentView.swift */,
-				16A476AB2C3B322200E7D1EA /* Assets.xcassets */,
 				16A476B02C3B322200E7D1EA /* Persistence.swift */,
+				1670995C2C4DEB9F0075107B /* ScreenDuelDebug.entitlements */,
+				16F8987B2C3DB4E600827B03 /* ScreenDuel.entitlements */,
+				16A476AB2C3B322200E7D1EA /* Assets.xcassets */,
 				16A476B22C3B322200E7D1EA /* ScreenDuel.xcdatamodeld */,
+				167B9E6F2C6192E60016F0FB /* deprecated */,
 				16A476AD2C3B322200E7D1EA /* Preview Content */,
 			);
 			path = ScreenDuel;
@@ -320,6 +347,7 @@
 				16A476DA2C3B3AE400E7D1EA /* TimeSelectorView.swift in Sources */,
 				16A476B12C3B322200E7D1EA /* Persistence.swift in Sources */,
 				16A476B42C3B322200E7D1EA /* ScreenDuel.xcdatamodeld in Sources */,
+				167B9E732C6194050016F0FB /* AppView.swift in Sources */,
 				1645E6812C4AED6F0089A8DB /* TimerObject.swift in Sources */,
 				1645E6832C4AED7A0089A8DB /* TimerView.swift in Sources */,
 				1624F5F52C49B0A1003D912D /* DuelView.swift in Sources */,
